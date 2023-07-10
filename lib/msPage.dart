@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MsPage extends StatefulWidget {
-  MsPage({super.key});
+  const MsPage({super.key});
 
   @override
   State<MsPage> createState() => _MsPageState();
