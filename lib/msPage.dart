@@ -23,7 +23,7 @@ class _MsPageState extends State<MsPage> {
         child: TextField(
           controller: contentController,
           decoration: InputDecoration(
-            hintText: "개인페이지 완성해주세요",
+            hintText: "추민수의 개인페이지입니다.",
             border: InputBorder.none,
           ),
           autofocus: true,
