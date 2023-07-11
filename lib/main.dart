@@ -1,8 +1,4 @@
-import 'package:a_bar/gjPage.dart';
-import 'package:a_bar/jhPage.dart';
-import 'package:a_bar/jjPage.dart';
-import 'package:a_bar/msPage.dart';
-import 'package:a_bar/syPage.dart';
+import 'package:a_bar/bartenderPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -225,7 +221,14 @@ class HomePage extends StatelessWidget {
                       fontSize: 30),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              bartenderPage()), // SecondPage는 이동할 대상 페이지의 클래스명
+                    );
+                  },
                   icon: Icon(
                     Icons.add_circle,
                     color: Color.fromARGB(255, 208, 208, 208),

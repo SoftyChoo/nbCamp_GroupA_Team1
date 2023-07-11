@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class gjPage extends StatefulWidget {
-  gjPage({super.key});
+class bartenderPage extends StatefulWidget {
+  bartenderPage({super.key});
 
   @override
-  State<gjPage> createState() => _MsPageState();
+  State<bartenderPage> createState() => _MsPageState();
 }
 
-class _MsPageState extends State<gjPage> {
+class _MsPageState extends State<bartenderPage> {
   TextEditingController contentController = TextEditingController();
   double rating = 0; // 초기 별점 값 설정
   bool CommentCompleted = false; //작성 완료 상태 여부
