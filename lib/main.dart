@@ -30,34 +30,44 @@ class HomePage extends StatelessWidget {
     // 음식 사진 데이터
     List<Map<String, dynamic>> dataList = [
       {
-        "name": "MinSu",
-        "imgUrl":
-            "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg",
-        "age": "24"
+        "name": "Margarita",
+        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails1.png",
+        "bartender": "MinSu"
       },
       {
-        "name": "송규진",
-        "imgUrl":
-            "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg",
-        "age": "2살"
+        "name": "Black\nRussian",
+        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails2.png",
+        "bartender": "Gyujin"
       },
       {
-        "name": "이소연",
-        "imgUrl":
-            "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg",
-        "age": "2살"
+        "name": "Paloma  ",
+        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails4.png",
+        "bartender": "SoYeon"
       },
       {
-        "name": "안주환",
-        "imgUrl":
-            "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg",
-        "age": "2살"
+        "name": "Martinez",
+        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails3.png",
+        "bartender": "JuHwan"
       },
       {
-        "name": "황진주",
-        "imgUrl":
-            "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg",
-        "age": "2살"
+        "name": "Alexander",
+        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails5.png",
+        "bartender": "JinJu"
+      },
+      {
+        "name": "Margarita",
+        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails1.png",
+        "bartender": "MinSu"
+      },
+      {
+        "name": "Black\nRussian",
+        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails2.png",
+        "bartender": "Gyujin"
+      },
+      {
+        "name": "Paloma",
+        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails4.png",
+        "bartender": "SoYeon"
       },
     ];
 
@@ -69,126 +79,132 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ShaderMask(
-                shaderCallback: (Rect bounds) {
-                  return RadialGradient(
-                    center: Alignment.center,
-                    radius: 1.0,
-                    colors: [
-                      Colors.yellow,
-                      Colors.orange,
-                    ], // Adjust the gradient colors as desired
-                    tileMode: TileMode.mirror,
-                  ).createShader(bounds);
-                },
-                child: Text(
-                  "'A' BAR",
-                  style: TextStyle(
-                    fontFamily: 'abar',
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+              padding: const EdgeInsets.all(0.0),
+              child: Column(
+                children: [
+                  ShaderMask(
+                    shaderCallback: (Rect bounds) {
+                      return RadialGradient(
+                        center: Alignment.center,
+                        radius: 1.0,
+                        colors: [
+                          Colors.yellow,
+                          Colors.orange,
+                        ], // Adjust the gradient colors as desired
+                        tileMode: TileMode.mirror,
+                      ).createShader(bounds);
+                    },
+                    child: Text(
+                      "'A' BAR",
+                      style: TextStyle(
+                        fontFamily: 'abar',
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
-                ),
+                  SizedBox(height: 10),
+                  Text(
+                    "CockTails",
+                    style: TextStyle(
+                      fontFamily: "name",
+                      fontSize: 30,
+                      color: const Color.fromARGB(255, 208, 208, 208),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                ],
               ),
             ),
-            Expanded(
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.5,
               child: SingleChildScrollView(
                 child: GridView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, //가로로 두 개의 Gridview를 보여줌
-                    childAspectRatio: 4 / 5, //gridView의 높이 조절
+                    childAspectRatio: 7 / 5, //gridView의 높이 조절
                   ),
                   itemCount: dataList.length,
                   itemBuilder: (context, index) {
                     var blog = dataList[index];
                     String imgUrl = blog['imgUrl']!; // datalist의 url
                     String name = blog['name']!; //datalist의 name
-                    String age = blog['age']!;
+                    String age = blog['bartender']!;
 
                     return Container(
-                      margin: EdgeInsets.all(8),
+                      //margin: EdgeInsets.only(bottom: 8),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.black,
                         borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            blurRadius: 3,
-                            spreadRadius: 3,
-                          ),
-                        ],
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     color: Colors.grey.withOpacity(0.5),
+                        //     blurRadius: 3,
+                        //     spreadRadius: 3,
+                        //   ),
+                        // ],
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+
+                      child: Stack(
                         children: [
-                          Image.network(
-                            imgUrl,
-                            fit: BoxFit.cover,
-                            height: MediaQuery.of(context).size.width *
-                                0.5 *
-                                5 /
-                                3 *
-                                0.55,
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.network(
+                                imgUrl,
+                                fit: BoxFit.fitHeight,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Column(
-                                  children: [
-                                    Text(
-                                      //이름
-                                      name,
-                                      style: TextStyle(
-                                        fontFamily: "name",
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
+                          Row(
+                            children: [
+                              SizedBox(width: 120),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  Text(
+                                    //이름
+                                    name,
+                                    style: TextStyle(
+                                      fontFamily: "name",
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Bartender \n${age}",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "abar",
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.white,
+                                        width: 1.0,
                                       ),
                                     ),
-                                    Text(age),
-                                  ],
-                                ),
-                                Spacer(),
-                                IconButton(
-                                    onPressed: () {
-                                      if (name == "MinSu") {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) => MsPage()),
-                                        );
-                                      } else if (name == "송규진") {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) => gjPage()),
-                                        );
-                                      } else if (name == "이소연") {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) => syPage()),
-                                        );
-                                      } else if (name == "안주환") {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) => jhPage()),
-                                        );
-                                      } else if (name == "황진주") {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) => jjPage()),
-                                        );
-                                      }
-                                    },
-                                    icon: Icon(Icons.arrow_forward_ios)),
-                              ],
-                            ),
+                                    child: Text(
+                                      "10.00\$",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  SizedBox(height: 20)
+                                ],
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -197,18 +213,39 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "   Bartender",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 208, 208, 208),
+                      fontFamily: "name",
+                      fontSize: 30),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.add_circle,
+                    color: Color.fromARGB(255, 208, 208, 208),
+                  ),
+                )
+              ],
+            ),
+            // SizedBox(height: 8),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(10.0),
               child: Container(
                 width: double.infinity,
-                height: 120,
+                height: 200,
                 decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(10.0),
+                  color: const Color.fromARGB(255, 208, 208, 208),
+                  borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: Center(
                   child: Text(
-                    "저희 ‘A’ BAR은 각자의 특별한 기술로 고객들에게 \n즐거움을 선사하는 바텐더들의 이야기를 담고 있습니다.",
+                    "여기에 Bartender List 작성",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
