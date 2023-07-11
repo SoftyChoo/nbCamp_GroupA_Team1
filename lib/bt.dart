@@ -31,10 +31,14 @@ class MyApp extends StatelessWidget {
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
-                  Container(
-                    width: double.infinity,
-                    color: Colors.black.withOpacity(0.5),
-                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 30),
+                    child: Container(
+                      width: 100,
+                      height: 200,
+                      color: Colors.black,
+                    ),
+                  ), //칵테일이미지넣는박스
                 ],
               ),
             ),
@@ -44,6 +48,14 @@ class MyApp extends StatelessWidget {
                 color: Colors.black,
                 child: ListView(
                   children: [
+                    Row(
+                      children: [
+                        Text(
+                          'name',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
                     Center(
                       child: Text(
                         'Other Widgets',
