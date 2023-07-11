@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
     // 음식 사진 데이터
     List<Map<String, dynamic>> dataList = [
       {
-        "name": "추민수",
+        "name": "MinSu",
         "imgUrl":
             "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg",
         "age": "24"
@@ -68,77 +68,29 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.04,
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: Image.network('https://ifh.cc/g/gSmpQo.png'),
-            ),
-            SizedBox(height: 5),
-            ShaderMask(
-              shaderCallback: (Rect bounds) {
-                return RadialGradient(
-                  center: Alignment.center,
-                  radius: 1.0,
-                  colors: [
-                    Colors.yellow,
-                    Colors.orange,
-                  ], // Adjust the gradient colors as desired
-                  tileMode: TileMode.mirror,
-                ).createShader(bounds);
-              },
-              child: Text(
-                "'A' BAR",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  // Text(
-                  //   "소개",
-                  //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                  // ),
-                  // Container(
-                  //   width: double.infinity,
-                  //   height: 180,
-                  //   decoration: BoxDecoration(
-                  //     color: Colors.grey,
-                  //     borderRadius: BorderRadius.circular(
-                  //         10.0), // Adjust the value to control the roundness
-                  //   ),
-                  // ),
-                  Column(
-                    children: [
-                      Text("소개"),
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            height: 120,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                          Text(
-                            "저희 ‘A’ BAR은 각자의 특별한 기술로 고객들에게 \n즐거움을 선사하는 바텐더들의 이야기를 담고 있습니다.",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ],
+              padding: const EdgeInsets.all(20.0),
+              child: ShaderMask(
+                shaderCallback: (Rect bounds) {
+                  return RadialGradient(
+                    center: Alignment.center,
+                    radius: 1.0,
+                    colors: [
+                      Colors.yellow,
+                      Colors.orange,
+                    ], // Adjust the gradient colors as desired
+                    tileMode: TileMode.mirror,
+                  ).createShader(bounds);
+                },
+                child: Text(
+                  "'A' BAR",
+                  style: TextStyle(
+                    fontFamily: 'abar',
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
-                ],
+                ),
               ),
             ),
             Expanded(
@@ -191,6 +143,7 @@ class HomePage extends StatelessWidget {
                                       //이름
                                       name,
                                       style: TextStyle(
+                                        fontFamily: "name",
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -201,7 +154,7 @@ class HomePage extends StatelessWidget {
                                 Spacer(),
                                 IconButton(
                                     onPressed: () {
-                                      if (name == "추민수") {
+                                      if (name == "MinSu") {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -241,6 +194,23 @@ class HomePage extends StatelessWidget {
                       ),
                     );
                   },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: double.infinity,
+                height: 120,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Center(
+                  child: Text(
+                    "저희 ‘A’ BAR은 각자의 특별한 기술로 고객들에게 \n즐거움을 선사하는 바텐더들의 이야기를 담고 있습니다.",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ),
