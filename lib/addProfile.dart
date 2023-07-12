@@ -27,11 +27,6 @@ class syPage extends StatelessWidget {
     BlogController.text = bartenderProfile.btBlog;
     StyleController.text = bartenderProfile.btStyle;
     final FocusNode textFocusNode = FocusNode(); // FocusNode 생성
-    // @override
-    // void dispose() {
-    //   textFocusNode.dispose(); // 메모리 누수를 방지하기 위해 FocusNode 해제
-    //   super.dispose();
-    // }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -39,6 +34,12 @@ class syPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.black,
         title: Text('Add Profile'),
+        leading: IconButton(
+            onPressed: () {
+              bartenderService.removeItem(index: index);
+              Navigator.of(context).pop();
+            },
+            icon: Icon(Icons.arrow_back)),
       ),
       body: SingleChildScrollView(
         child: Padding(
