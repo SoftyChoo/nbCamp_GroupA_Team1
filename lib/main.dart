@@ -240,11 +240,21 @@ class _HomePageState extends State<HomePage> {
                   ),
                   IconButton(
                     onPressed: () {
+                      bartenderService.createItem(
+                        btName: '',
+                        btMbti: '',
+                        btAge: '',
+                        btAdvantage: '',
+                        btBlog: '',
+                        btStyle: '',
+                      );
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                syPage()), // SecondPage는 이동할 대상 페이지의 클래스명
+                          builder: (context) => syPage(
+                            index: bartenderService.btList.length - 1,
+                          ),
+                        ), // SecondPage는 이동할 대상 페이지의 클래스명
                       );
                     },
                     icon: Icon(
@@ -277,7 +287,7 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(fontFamily: "abar"),
                           ),
                           Text(
-                            "Minsu",
+                            bartender.btName,
                             style: TextStyle(fontFamily: "name"),
                           ),
                         ],
