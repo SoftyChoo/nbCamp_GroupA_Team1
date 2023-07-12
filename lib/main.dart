@@ -43,42 +43,50 @@ class _HomePageState extends State<HomePage> {
       {
         "name": "Margarita",
         "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails1.png",
-        "bartender": "MinSu"
+        "bartender": "MinSu",
+        "price": "13.00"
       },
       {
         "name": "Black\nRussian",
         "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails2.png",
-        "bartender": "Gyujin"
+        "bartender": "Gyujin",
+        "price": "12.00"
       },
       {
         "name": "Paloma  ",
         "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails4.png",
-        "bartender": "SoYeon"
+        "bartender": "SoYeon",
+        "price": "14.00"
       },
       {
         "name": "Martinez",
         "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails3.png",
-        "bartender": "JuHwan"
+        "bartender": "JuHwan",
+        "price": "15.00"
       },
       {
         "name": "Alexander",
         "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails5.png",
-        "bartender": "JinJu"
+        "bartender": "JinJu",
+        "price": "11.00"
       },
       {
         "name": " Old\nfashioned",
         "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails6.png",
-        "bartender": ""
+        "bartender": "",
+        "price": "10.00"
       },
       {
         "name": "Aviation",
         "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails8.png",
-        "bartender": ""
+        "bartender": "",
+        "price": "10.00"
       },
       {
         "name": "Mojito",
         "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails7.png",
-        "bartender": ""
+        "bartender": "",
+        "price": "10.00"
       },
     ];
 
@@ -148,21 +156,13 @@ class _HomePageState extends State<HomePage> {
                       String imgUrl = blog['imgUrl']!; // datalist의 url
                       String name = blog['name']!; //datalist의 name
                       String bt = blog['bartender']!;
+                      String price = blog['price']!;
 
                       return Container(
-                        //margin: EdgeInsets.only(bottom: 8),
                         decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(8),
-                          // boxShadow: [
-                          //   BoxShadow(
-                          //     color: Colors.grey.withOpacity(0.5),
-                          //     blurRadius: 3,
-                          //     spreadRadius: 3,
-                          //   ),
-                          // ],
                         ),
-
                         child: Stack(
                           children: [
                             Row(
@@ -211,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       child: Text(
-                                        "10.00\$",
+                                        "$price\$",
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ),
