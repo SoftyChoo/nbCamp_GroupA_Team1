@@ -287,7 +287,7 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(fontFamily: "abar"),
                           ),
                           Text(
-                            "Minsu",
+                            bartender.btName,
                             style: TextStyle(fontFamily: "name"),
                           ),
                         ],

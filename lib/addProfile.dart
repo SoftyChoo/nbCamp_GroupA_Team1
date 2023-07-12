@@ -46,7 +46,7 @@ class syPage extends StatelessWidget {
           child: Container(
             child: Column(
               children: [
-                TextFormField(
+                TextField(
                   controller: NameController,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next, // Keyboard Enter키 속성
@@ -54,13 +54,8 @@ class syPage extends StatelessWidget {
                     label: Text('Name'),
                     hintText: 'Enter Your Name',
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'check';
-                    }
-                  },
                 ),
-                TextFormField(
+                TextField(
                   controller: AgeController,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
@@ -69,15 +64,8 @@ class syPage extends StatelessWidget {
                     label: Text('Age'),
                     hintText: 'Enter Your Age',
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Check';
-                    } else {
-                      return null;
-                    }
-                  },
                 ),
-                TextFormField(
+                TextField(
                   controller: MBTIController,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
@@ -85,15 +73,8 @@ class syPage extends StatelessWidget {
                     label: Text('MBTI'),
                     hintText: 'Enter Your MBTI',
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Check';
-                    } else {
-                      return null;
-                    }
-                  },
                 ),
-                TextFormField(
+                TextField(
                   controller: ADController,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
@@ -101,15 +82,8 @@ class syPage extends StatelessWidget {
                     label: Text('Advantage'),
                     hintText: 'Enter Your Advantage',
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Check';
-                    } else {
-                      return null;
-                    }
-                  },
                 ),
-                TextFormField(
+                TextField(
                   controller: BlogController,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
@@ -117,15 +91,8 @@ class syPage extends StatelessWidget {
                     label: Text('Git/Blog'),
                     hintText: 'Enter Your Git/Blog',
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Check';
-                    } else {
-                      return null;
-                    }
-                  },
                 ),
-                TextFormField(
+                TextField(
                   controller: StyleController,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
@@ -133,13 +100,6 @@ class syPage extends StatelessWidget {
                     label: Text('Collaboration Style'),
                     hintText: 'Enter Your Collaboration Style',
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Check';
-                    } else {
-                      return null;
-                    }
-                  },
                 ),
                 SizedBox(
                   height: 20,
@@ -172,37 +132,15 @@ class syPage extends StatelessWidget {
                         },
                       );
                     } else {
-                      AlertDialog(
-                        content: Text('작성을 완료하셨습니까?'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              bartenderService.updateItem(
-                                  index: index,
-                                  btName: NameController.text,
-                                  btMbti: MBTIController.text,
-                                  btAge: AgeController.text,
-                                  btAdvantage: ADController.text,
-                                  btBlog: BlogController.text,
-                                  btStyle: StyleController.text);
-                              Navigator.of(context).pop(); // 대화 상자 닫기
-                            },
-                            child: Text(
-                              '확인',
-                              style: TextStyle(color: Colors.blue),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop(); // 대화 상자 닫기
-                            },
-                            child: Text(
-                              '취소',
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          ),
-                        ],
-                      );
+                      bartenderService.updateItem(
+                          index: index,
+                          btName: NameController.text,
+                          btMbti: MBTIController.text,
+                          btAge: AgeController.text,
+                          btAdvantage: ADController.text,
+                          btBlog: BlogController.text,
+                          btStyle: StyleController.text);
+                      Navigator.of(context).pop();
                     }
                   },
                   child: const Text('Submit'),
