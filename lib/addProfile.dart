@@ -30,10 +30,18 @@ class syPage extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.black,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.black,
-        title: Text('Add Profile'),
+        title: Text(
+          'Add Profile',
+          style: TextStyle(
+            fontFamily: 'abar',
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
+          ),
+        ),
         leading: IconButton(
             onPressed: () {
               bartenderService.removeItem(index: index);
@@ -48,58 +56,218 @@ class syPage extends StatelessWidget {
             child: Column(
               children: [
                 TextField(
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'abar',
+                  ),
                   controller: NameController,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next, // Keyboard Enter키 속성
+                  maxLines: null,
                   decoration: InputDecoration(
-                    label: Text('Name'),
+                    label: Text(
+                      'Name',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'abar',
+                      ),
+                    ),
                     hintText: 'Enter Your Name',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                      fontFamily: 'abar',
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.white // Text Field 언더바색상
+                              ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.amber, // Text Field 포커스 잡혔을때 테두리 색상
+                      ),
+                    ),
                   ),
                 ),
+                SizedBox(height: 10), // 위아래 텍스트 필드 겹침 방지
                 TextField(
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'abar',
+                  ),
                   controller: AgeController,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly
+                  ], // 입력 제한 - 숫자만 입력 가능
+                  keyboardType: TextInputType.number, // 키패드 - 숫자만 뜨게 설정
                   textInputAction: TextInputAction.next,
+                  maxLines: null,
                   decoration: InputDecoration(
-                    label: Text('Age'),
+                    label: Text(
+                      'Age',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'abar',
+                      ),
+                    ),
                     hintText: 'Enter Your Age',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                      fontFamily: 'abar',
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.white // Text Field 언더바색상
+                              ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.amber, // Text Field 포커스 잡혔을때 테두리 색상
+                      ),
+                    ),
                   ),
                 ),
+                SizedBox(height: 10), // 위아래 텍스트 필드 겹침 방지
                 TextField(
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'abar',
+                  ),
                   controller: MBTIController,
+                  inputFormatters: [
+                    FilteringTextInputFormatter(RegExp('[A-Z]'), allow: true),
+                  ],
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
+                  maxLines: null,
                   decoration: InputDecoration(
-                    label: Text('MBTI'),
-                    hintText: 'Enter Your MBTI',
+                    label: Text(
+                      'MBTI',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'abar',
+                      ),
+                    ),
+                    hintText: 'Enter Your MBTI (ex. ESTJ)',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                      fontFamily: 'abar',
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.white // Text Field 언더바색상
+                              ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.amber, // Text Field 포커스 잡혔을때 테두리 색상
+                      ),
+                    ),
                   ),
                 ),
+                SizedBox(height: 10), // 위아래 텍스트 필드 겹침 방지
                 TextField(
-                  controller: ADController,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    label: Text('Advantage'),
-                    hintText: 'Enter Your Advantage',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'abar',
                   ),
-                ),
-                TextField(
                   controller: BlogController,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
+                  maxLines: null,
                   decoration: InputDecoration(
-                    label: Text('Git/Blog'),
+                    label: Text(
+                      'Git/Blog',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'abar',
+                      ),
+                    ),
                     hintText: 'Enter Your Git/Blog',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                      fontFamily: 'abar',
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.white // Text Field 언더바색상
+                              ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.amber, // Text Field 포커스 잡혔을때 테두리 색상
+                      ),
+                    ),
                   ),
                 ),
+                SizedBox(height: 10), // 위아래 텍스트 필드 겹침 방지
                 TextField(
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'abar',
+                  ),
+                  controller: ADController,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    label: Text(
+                      'Advantage',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'abar',
+                      ),
+                    ),
+                    hintText: 'Enter Your Advantage',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                      fontFamily: 'abar',
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.white // Text Field 언더바색상
+                              ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.amber, // Text Field 포커스 잡혔을때 테두리 색상
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10), // 위아래 텍스트 필드 겹침 방지
+                TextField(
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'abar',
+                  ),
                   controller: StyleController,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
+                  maxLines: null,
                   decoration: InputDecoration(
-                    label: Text('Collaboration Style'),
+                    label: Text(
+                      'Collaboration Style',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'abar',
+                      ),
+                    ),
                     hintText: 'Enter Your Collaboration Style',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                      fontFamily: 'abar',
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.white // Text Field 언더바색상
+                              ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.amber, // Text Field 포커스 잡혔을때 테두리 색상
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -144,7 +312,16 @@ class syPage extends StatelessWidget {
                       Navigator.of(context).pop();
                     }
                   },
-                  child: const Text('Submit'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.amber,
+                  ),
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(
+                      fontFamily: 'abar',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ],
             ),
