@@ -55,6 +55,49 @@ class _bartenderPage extends State<bartenderPage> {
                         width: double.infinity,
                         fit: BoxFit.cover,
                       ),
+                      Positioned(
+                        //시작
+                        top: 2.0,
+                        left: 10.0,
+                        child: Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'WHO',
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5),
+                                    fontSize: 60,
+                                    fontWeight: FontWeight.w900),
+                                textAlign: TextAlign.left,
+                              ),
+                              Text(
+                                '                     MADE',
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.left,
+                              ),
+                              Text(
+                                '                THIS',
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5),
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'COCKTAIL?',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 197, 32, 32)
+                                        .withOpacity(0.5),
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.w900),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ), //끝
                       Align(
                         alignment: Alignment.topRight,
                         child: Container(
@@ -79,14 +122,17 @@ class _bartenderPage extends State<bartenderPage> {
                   color: Colors.black,
                   child: ListView(
                     children: [
-                      SizedBox(
-                        child: Text(
-                          'INTRODUCTION',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontWeight: FontWeight.w700),
-                          textAlign: TextAlign.center,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: SizedBox(
+                          child: Text(
+                            '- INTRODUCTION -',
+                            style: TextStyle(
+                                color: Colors.white.withOpacity(0.5),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                       Row(
@@ -99,9 +145,9 @@ class _bartenderPage extends State<bartenderPage> {
                               child: Text(
                                 'NAME : ',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -123,9 +169,9 @@ class _bartenderPage extends State<bartenderPage> {
                               child: Text(
                                 'MBTI : ',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -147,9 +193,9 @@ class _bartenderPage extends State<bartenderPage> {
                               child: Text(
                                 'AGE : ',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
