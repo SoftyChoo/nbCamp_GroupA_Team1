@@ -1,5 +1,7 @@
+import 'package:a_bar/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class bartenderPage extends StatefulWidget {
@@ -29,9 +31,26 @@ class _MsPageState extends State<bartenderPage> {
         textFocusNode.unfocus();
       },
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePage(),
+                ),
+              );
+            },
+          ),
+        ),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: Column(
               children: [
                 RatingBar.builder(
@@ -55,8 +74,20 @@ class _MsPageState extends State<bartenderPage> {
                 TextField(
                   focusNode: textFocusNode, // FocusNode 할당
                   scrollPhysics: NeverScrollableScrollPhysics(), //스크롤 불가
-                  maxLines: 3, //n줄까지 화면에 보임
-                  maxLength: 100, //글자수 제한
+                  maxLines: 5, //n줄까지 화면에 보임
+                  maxLength: 200, //글자수 제한
+                  inputFormatters: [
+                    TextInputFormatter.withFunction((oldValue, newValue) {
+                      int newLines = newValue.text.split('\n').length;
+                      if (newLines > 5) {
+                        return oldValue;
+                      } else {
+                        return newValue;
+                      }
+                    })
+                  ], // Textinputformatter를 사용하여 라인 수를 체크함.
+                  // newLines > x에서 x부터의 줄을 넘길 수 없음
+                  style: TextStyle(color: Colors.green),
                   decoration: InputDecoration(
                     hintText: '평가를 남겨주세요',
                     border: OutlineInputBorder(
@@ -65,6 +96,9 @@ class _MsPageState extends State<bartenderPage> {
                   ),
                 ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown[600],
+                  ),
                   onPressed: () {
                     setState(() {
                       CommentCompleted = true; // 작성 완료 상태 업데이트
