@@ -36,7 +36,9 @@ class _bartenderPage extends State<bartenderPage> {
           appBar: AppBar(
             backgroundColor: Colors.black,
             leading: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              }, // 현재 화면을 닫고 이전 화면으로 돌아감
               icon: Icon(Icons.arrow_back),
             ),
           ),
@@ -48,29 +50,121 @@ class _bartenderPage extends State<bartenderPage> {
                   width: double.infinity,
                   height: 300,
                   child: Stack(
-                    alignment: Alignment.topRight,
+                    alignment: Alignment.bottomRight,
                     children: [
-                      Image.network(
-                        'https://ifh.cc/g/XHj5VA.jpg',
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Container(
-                        width: 150,
-                        height: 200,
-                        color: Colors.black,
-                      ), //칵테일이미지박스
+                      ShaderMask(
+                        shaderCallback: (Rect bounds) {
+                          return LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.transparent,
+                              Colors.black,
+                            ],
+                            stops: [0.8, 1.0], //하단 그라데이션범위지정
+                          ).createShader(bounds);
+                        },
+                        blendMode: BlendMode.srcATop,
+                        child: ShaderMask(
+                          shaderCallback: (Rect bounds) {
+                            return LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [
+                                Colors.transparent,
+                                Colors.black,
+                              ],
+                              stops: [0.8, 1.0], //상단 그라데이션 범위지정
+                            ).createShader(bounds);
+                          },
+                          blendMode: BlendMode.srcATop,
+                          child: Image.network(
+                            'https://i.pinimg.com/564x/83/02/3a/83023a439b482e862d1c3e22c8bc7711.jpg',
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ), //그라데이션 끝
+                      Positioned(
+                        //시작
+                        top: 2.0,
+                        left: 10.0,
+                        child: Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'WHO',
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5),
+                                    fontSize: 60,
+                                    fontWeight: FontWeight.w900),
+                                textAlign: TextAlign.left,
+                              ),
+                              Text(
+                                '                     MADE',
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.left,
+                              ),
+                              Text(
+                                '                THIS',
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5),
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'COCKTAIL?',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 197, 32, 32)
+                                        .withOpacity(0.5),
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.w900),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ), //끝
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Container(
+                          margin: EdgeInsets.all(20.0), // 원하는 margin 값을 설정합니다.
+                          width: 100,
+                          height: 150,
+                          color: Colors.black,
+                          child: Text(
+                            '선택한 칵테일이미지 들어갈곳',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ) //칵테일이미지박스
                     ],
                   ),
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: Container(
                   height: 200,
                   color: Colors.black,
                   child: ListView(
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: SizedBox(
+                          child: Text(
+                            '- INTRODUCTION -',
+                            style: TextStyle(
+                                color: Colors.white.withOpacity(0.5),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
                       Row(
                         children: [
                           SizedBox(
@@ -79,11 +173,11 @@ class _bartenderPage extends State<bartenderPage> {
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text(
-                                'NAME',
+                                'NAME : ',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -103,11 +197,11 @@ class _bartenderPage extends State<bartenderPage> {
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text(
-                                'MBTI',
+                                'MBTI : ',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -127,11 +221,11 @@ class _bartenderPage extends State<bartenderPage> {
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text(
-                                'AGE',
+                                'AGE : ',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -196,15 +290,11 @@ class _bartenderPage extends State<bartenderPage> {
                 ),
               ),
               Expanded(
-                flex: 3,
-                child: Stack(
-                  children: [
-                    Container(
-                      height: 100,
-                      width: double.infinity,
-                      color: Colors.amber,
-                    ),
-                    Padding(
+                flex: 4, //불필요한 stack위젯 삭제
+                child: Container(
+                  color: Colors.black, //별점 배경색변경
+                  child: SingleChildScrollView(
+                    child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
@@ -217,8 +307,9 @@ class _bartenderPage extends State<bartenderPage> {
                             itemSize: 30.0, // 아이콘 크기 조절
                             itemBuilder: (context, _) => Icon(
                               Icons.wine_bar,
-                              color: Colors.amber[500],
+                              color: Colors.amber[500], // 선택된 별점 아이콘 색상
                             ),
+                            unratedColor: Colors.grey, // 선택되지 않은 별점 아이콘 색상
                             onRatingUpdate: (newRating) {
                               setState(() {
                                 rating = newRating; // rating 변수 업데이트
@@ -227,23 +318,32 @@ class _bartenderPage extends State<bartenderPage> {
                             },
                           ),
                           TextField(
+                            style: TextStyle(
+                                color: Colors.white), // 텍스트 필드 텍스트 색 변경
                             focusNode: textFocusNode, // FocusNode 할당
                             scrollPhysics:
                                 NeverScrollableScrollPhysics(), //스크롤 불가
                             maxLines: 3, //n줄까지 화면에 보임
                             maxLength: 100, //글자수 제한
                             decoration: InputDecoration(
+                              filled: true,
+                              fillColor: const Color.fromARGB(255, 46, 45, 45),
                               hintText: '평가를 남겨주세요',
+                              hintStyle: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w500), //색상변경 진주
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(0),
+                                borderRadius: BorderRadius.circular(5),
                               ),
                             ),
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                CommentCompleted = true; // 작성 완료 상태 업데이트
-                              });
+                              setState(
+                                () {
+                                  CommentCompleted = true; // 작성 완료 상태 업데이트
+                                },
+                              );
                               textFocusNode.unfocus(); // 텍스트 필드에서 포커스 해제
                               showDialog(
                                 context: context,
@@ -276,12 +376,18 @@ class _bartenderPage extends State<bartenderPage> {
                                 },
                               );
                             },
-                            child: Text('확인'),
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.amber), //확인버튼 색변경
+                            child: Text(
+                              'Check',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 15),
+                            ),
                           ),
                         ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],
