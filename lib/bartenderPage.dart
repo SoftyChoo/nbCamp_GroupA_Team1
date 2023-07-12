@@ -43,7 +43,6 @@ class _bartenderPage extends State<bartenderPage> {
             ),
           ),
           body: Column(
-            //수정할부분시작
             children: [
               Expanded(
                 flex: 3,
@@ -75,7 +74,7 @@ class _bartenderPage extends State<bartenderPage> {
                                 Colors.transparent,
                                 Colors.black,
                               ],
-                              stops: [0.8, 1.0],
+                              stops: [0.8, 1.0], //상단 그라데이션 범위지정
                             ).createShader(bounds);
                           },
                           blendMode: BlendMode.srcATop,
@@ -85,7 +84,7 @@ class _bartenderPage extends State<bartenderPage> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                      ), //수정할부분끝
+                      ), //그라데이션 끝
                       Positioned(
                         //시작
                         top: 2.0,
@@ -319,6 +318,7 @@ class _bartenderPage extends State<bartenderPage> {
                             },
                           ),
                           TextField(
+                            style: TextStyle(color: Colors.white),
                             focusNode: textFocusNode, // FocusNode 할당
                             scrollPhysics:
                                 NeverScrollableScrollPhysics(), //스크롤 불가
