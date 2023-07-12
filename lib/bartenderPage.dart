@@ -345,36 +345,6 @@ class _bartenderPage extends State<bartenderPage> {
                                 },
                               );
                               textFocusNode.unfocus(); // 텍스트 필드에서 포커스 해제
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    content: Text('작성을 완료하셨습니까?'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context)
-                                              .pop(); // 대화 상자 닫기
-                                        },
-                                        child: Text(
-                                          '확인',
-                                          style: TextStyle(color: Colors.blue),
-                                        ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context)
-                                              .pop(); // 대화 상자 닫기
-                                        },
-                                        child: Text(
-                                          '취소',
-                                          style: TextStyle(color: Colors.red),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
                             },
                             style: ElevatedButton.styleFrom(
                                 primary: Colors.amber), //확인버튼 색변경
