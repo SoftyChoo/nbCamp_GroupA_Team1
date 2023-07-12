@@ -51,19 +51,19 @@ class HomePage extends StatelessWidget {
         "bartender": "JinJu"
       },
       {
-        "name": "Margarita",
-        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails1.png",
-        "bartender": "MinSu"
+        "name": " Old\nfashioned",
+        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails6.png",
+        "bartender": ""
       },
       {
-        "name": "Black\nRussian",
-        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails2.png",
-        "bartender": "Gyujin"
+        "name": "Aviation",
+        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails8.png",
+        "bartender": ""
       },
       {
-        "name": "Paloma",
-        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails4.png",
-        "bartender": "SoYeon"
+        "name": "Mojito",
+        "imgUrl": "https://softychoo.github.io/assets/img/blog/cocktails7.png",
+        "bartender": ""
       },
     ];
 
@@ -236,22 +236,40 @@ class HomePage extends StatelessWidget {
                 )
               ],
             ),
-            // SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
-                width: double.infinity,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 208, 208, 208),
-                  borderRadius: BorderRadius.circular(20.0),
+            Container(
+              width: double.infinity,
+              height: 200,
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 208, 208, 208),
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: ListTile(
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.wine_bar_outlined,
+                      color: Colors.black,
+                    ),
+                    Text(
+                      " Bartender : ",
+                      style: TextStyle(fontFamily: "abar"),
+                    ),
+                    Text(
+                      "Minsu",
+                      style: TextStyle(fontFamily: "name"),
+                    ),
+                  ],
                 ),
-                child: Center(
-                  child: Text(
-                    "여기에 Bartender List 작성",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ),
+                trailing: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                bartenderPage()), // SecondPage는 이동할 대상 페이지의 클래스명
+                      );
+                    },
+                    icon: Icon(Icons.arrow_circle_right)),
               ),
             ),
           ],
