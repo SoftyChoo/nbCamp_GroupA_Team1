@@ -13,9 +13,12 @@ class syPage extends StatelessWidget {
   final TextEditingController Controller = TextEditingController();
   final TextEditingController StyleController = TextEditingController();
 
-  syPage({Key? key, required this.index}); // : super(key: key); // 수정된 부분
+  syPage(
+      {super.key,
+      required this.index,
+      required this.isCreat}); // : super(key: key); // 수정된 부분
   final int index;
-
+  final bool isCreat;
   @override
   Widget build(BuildContext context) {
     BartenderService bartenderService = context.read<BartenderService>();
@@ -28,6 +31,8 @@ class syPage extends StatelessWidget {
     StyleController.text = bartenderProfile.btStyle;
     final FocusNode textFocusNode = FocusNode(); // FocusNode 생성
 
+    final String changeText;
+    isCreat ? changeText = 'Add Profile' : changeText = 'Update Profile';
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
@@ -35,7 +40,7 @@ class syPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.black,
         title: Text(
-          'Add Profile',
+          changeText,
           style: TextStyle(
             fontFamily: 'abar',
             fontWeight: FontWeight.bold,
@@ -44,8 +49,12 @@ class syPage extends StatelessWidget {
         ),
         leading: IconButton(
             onPressed: () {
-              bartenderService.removeItem(index: index);
-              Navigator.of(context).pop();
+              if (isCreat == true) {
+                bartenderService.removeItem(index: index);
+                Navigator.of(context).pop();
+              } else {
+                Navigator.of(context).pop();
+              }
             },
             icon: Icon(Icons.arrow_back)),
       ),
