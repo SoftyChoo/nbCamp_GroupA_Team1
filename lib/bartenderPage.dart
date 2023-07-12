@@ -36,7 +36,9 @@ class _bartenderPage extends State<bartenderPage> {
           appBar: AppBar(
             backgroundColor: Colors.black,
             leading: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              }, // 현재 화면을 닫고 이전 화면으로 돌아감
               icon: Icon(Icons.arrow_back),
             ),
           ),
@@ -277,10 +279,9 @@ class _bartenderPage extends State<bartenderPage> {
                             itemSize: 30.0, // 아이콘 크기 조절
                             itemBuilder: (context, _) => Icon(
                               Icons.wine_bar,
-                              color: rating == 0
-                                  ? Colors.white
-                                  : Colors.amber[500],
-                            ), //튜터님한테 질문하기 색 변경
+                              color: Colors.amber[500], // 선택된 별점 아이콘 색상
+                            ),
+                            unratedColor: Colors.grey, // 선택되지 않은 별점 아이콘 색상
                             onRatingUpdate: (newRating) {
                               setState(() {
                                 rating = newRating; // rating 변수 업데이트
