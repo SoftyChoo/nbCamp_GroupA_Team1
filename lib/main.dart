@@ -253,6 +253,7 @@ class _HomePageState extends State<HomePage> {
                         MaterialPageRoute(
                           builder: (context) => syPage(
                             index: bartenderService.btList.length - 1,
+                            isCreat: true,
                           ),
                         ), // SecondPage는 이동할 대상 페이지의 클래스명
                       );
@@ -294,11 +295,88 @@ class _HomePageState extends State<HomePage> {
                       ),
                       trailing: IconButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      bartenderPage()), // SecondPage는 이동할 대상 페이지의 클래스명
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Column(
+                                    children: [
+                                      Text(
+                                        'Bartender : [ ${bartender.btName} ]',
+                                        style: TextStyle(fontFamily: "name"),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(top: 20),
+                                        height: 35,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: Colors.blue,
+                                            width: 1.0,
+                                          ),
+                                        ),
+                                        child: TextButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      bartenderPage()), // SecondPage는 이동할 대상 페이지의 클래스명
+                                            ).then(
+                                              (value) {
+                                                Navigator.pop(
+                                                    context); // Close the dialog popup
+                                              },
+                                            );
+                                          },
+                                          child: Text(
+                                            "INFORMATION",
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        bartenderService.removeItem(
+                                          index: index,
+                                        );
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        '삭제',
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                    ),
+                                    SizedBox(width: 50),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => syPage(
+                                              index: index,
+                                              isCreat: false,
+                                            ),
+                                          ),
+                                        ).then(
+                                          (value) {
+                                            Navigator.pop(
+                                                context); // Close the dialog popup
+                                          },
+                                        );
+                                      },
+                                      child: Text('수정'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(false),
+                                      child: Text('취소'),
+                                    ),
+                                  ],
+                                );
+                              },
                             );
                           },
                           icon: Icon(Icons.arrow_circle_right)),
