@@ -43,6 +43,7 @@ class _bartenderPage extends State<bartenderPage> {
             ),
           ),
           body: Column(
+            //수정할부분시작
             children: [
               Expanded(
                 flex: 3,
@@ -52,11 +53,39 @@ class _bartenderPage extends State<bartenderPage> {
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      Image.network(
-                        'https://i.pinimg.com/564x/83/02/3a/83023a439b482e862d1c3e22c8bc7711.jpg',
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
+                      ShaderMask(
+                        shaderCallback: (Rect bounds) {
+                          return LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.transparent,
+                              Colors.black,
+                            ],
+                            stops: [0.8, 1.0], //하단 그라데이션범위지정
+                          ).createShader(bounds);
+                        },
+                        blendMode: BlendMode.srcATop,
+                        child: ShaderMask(
+                          shaderCallback: (Rect bounds) {
+                            return LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [
+                                Colors.transparent,
+                                Colors.black,
+                              ],
+                              stops: [0.8, 1.0],
+                            ).createShader(bounds);
+                          },
+                          blendMode: BlendMode.srcATop,
+                          child: Image.network(
+                            'https://i.pinimg.com/564x/83/02/3a/83023a439b482e862d1c3e22c8bc7711.jpg',
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ), //수정할부분끝
                       Positioned(
                         //시작
                         top: 2.0,
@@ -103,9 +132,9 @@ class _bartenderPage extends State<bartenderPage> {
                       Align(
                         alignment: Alignment.topRight,
                         child: Container(
-                          margin: EdgeInsets.all(8.0), // 원하는 margin 값을 설정합니다.
-                          width: 120,
-                          height: 180,
+                          margin: EdgeInsets.all(20.0), // 원하는 margin 값을 설정합니다.
+                          width: 100,
+                          height: 150,
                           color: Colors.black,
                           child: Text(
                             '선택한 칵테일이미지 들어갈곳',
