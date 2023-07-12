@@ -1,8 +1,18 @@
+import 'package:a_bar/addProfile.dart';
 import 'package:a_bar/bartenderPage.dart';
+import 'package:a_bar/bartender_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => BartenderService()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -226,7 +236,7 @@ class HomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              bartenderPage()), // SecondPage는 이동할 대상 페이지의 클래스명
+                              syPage()), // SecondPage는 이동할 대상 페이지의 클래스명
                     );
                   },
                   icon: Icon(
