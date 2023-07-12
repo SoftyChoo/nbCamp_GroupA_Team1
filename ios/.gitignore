@@ -27,6 +27,11 @@ Flutter/flutter_export_environment.sh
 ServiceDefinitions.json
 Runner/GeneratedPluginRegistrant.*
 
+.dart_tool/pakage_config.json
+.dart_tool/pakage_subset
+.flutter-plugins
+.flutter-plugins-dependencies
+
 # Exceptions to above rules.
 !default.mode1v3
 !default.mode2v3
