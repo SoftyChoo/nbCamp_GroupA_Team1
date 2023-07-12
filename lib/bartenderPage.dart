@@ -48,10 +48,10 @@ class _bartenderPage extends State<bartenderPage> {
                   width: double.infinity,
                   height: 300,
                   child: Stack(
-                    alignment: Alignment.topRight,
+                    alignment: Alignment.bottomRight,
                     children: [
                       Image.network(
-                        'https://ifh.cc/g/XHj5VA.jpg',
+                        'https://i.pinimg.com/564x/83/02/3a/83023a439b482e862d1c3e22c8bc7711.jpg',
                         width: double.infinity,
                         fit: BoxFit.cover,
                       ),
@@ -62,6 +62,10 @@ class _bartenderPage extends State<bartenderPage> {
                           width: 120,
                           height: 180,
                           color: Colors.black,
+                          child: Text(
+                            '선택한 칵테일이미지 들어갈곳',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ) //칵테일이미지박스
                     ],
@@ -69,7 +73,7 @@ class _bartenderPage extends State<bartenderPage> {
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: Container(
                   height: 200,
                   color: Colors.black,
@@ -80,7 +84,7 @@ class _bartenderPage extends State<bartenderPage> {
                           'INTRODUCTION',
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 20,
+                              fontSize: 30,
                               fontWeight: FontWeight.w700),
                           textAlign: TextAlign.center,
                         ),
@@ -210,97 +214,103 @@ class _bartenderPage extends State<bartenderPage> {
                 ),
               ),
               Expanded(
-                flex: 3,
-                child: Stack(
-                  children: [
-                    Container(
-                      color: Colors.blue, //별점 배경색변경(검정색으로하고싶음)
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              RatingBar.builder(
-                                initialRating:
-                                    rating, // rating 변수를 초기 별점 값으로 설정
-                                minRating: 0, //평점 최소 단위. 0점부터 시작
-                                direction: Axis.horizontal,
-                                allowHalfRating: true, //별점 반값 가능 허용여부
-                                itemCount: 5, //평점 갯수 조절
-                                itemSize: 30.0, // 아이콘 크기 조절
-                                itemBuilder: (context, _) => Icon(
-                                  Icons.wine_bar,
-                                  color: Colors.amber[500],
-                                ),
-                                onRatingUpdate: (newRating) {
-                                  setState(() {
-                                    rating = newRating; // rating 변수 업데이트
-                                  });
-                                  print(rating); // 업데이트된 별점 출력
-                                },
-                              ),
-                              TextField(
-                                focusNode: textFocusNode, // FocusNode 할당
-                                scrollPhysics:
-                                    NeverScrollableScrollPhysics(), //스크롤 불가
-                                maxLines: 3, //n줄까지 화면에 보임
-                                maxLength: 100, //글자수 제한
-                                decoration: InputDecoration(
-                                  hintText: '평가를 남겨주세요',
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                  ),
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      CommentCompleted = true; // 작성 완료 상태 업데이트
-                                    },
-                                  );
-                                  textFocusNode.unfocus(); // 텍스트 필드에서 포커스 해제
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        content: Text('작성을 완료하셨습니까?'),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context)
-                                                  .pop(); // 대화 상자 닫기
-                                            },
-                                            child: Text(
-                                              '확인',
-                                              style:
-                                                  TextStyle(color: Colors.blue),
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context)
-                                                  .pop(); // 대화 상자 닫기
-                                            },
-                                            child: Text(
-                                              '취소',
-                                              style:
-                                                  TextStyle(color: Colors.red),
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
-                                child: Text('확인'),
-                              ),
-                            ],
+                flex: 4, //불필요한 stack위젯 삭제
+                child: Container(
+                  color: Colors.black, //진주_별점 배경색변경(검정색으로하고싶음)
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          RatingBar.builder(
+                            initialRating: rating, // rating 변수를 초기 별점 값으로 설정
+                            minRating: 0, //평점 최소 단위. 0점부터 시작
+                            direction: Axis.horizontal,
+                            allowHalfRating: true, //별점 반값 가능 허용여부
+                            itemCount: 5, //평점 갯수 조절
+                            itemSize: 30.0, // 아이콘 크기 조절
+                            itemBuilder: (context, _) => Icon(
+                              Icons.wine_bar,
+                              color: rating == 0
+                                  ? Colors.white
+                                  : Colors.amber[500],
+                            ), //튜터님한테 질문하기 색 변경
+                            onRatingUpdate: (newRating) {
+                              setState(() {
+                                rating = newRating; // rating 변수 업데이트
+                              });
+                              print(rating); // 업데이트된 별점 출력
+                            },
                           ),
-                        ),
+                          TextField(
+                            focusNode: textFocusNode, // FocusNode 할당
+                            scrollPhysics:
+                                NeverScrollableScrollPhysics(), //스크롤 불가
+                            maxLines: 3, //n줄까지 화면에 보임
+                            maxLength: 100, //글자수 제한
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: const Color.fromARGB(255, 46, 45, 45),
+                              hintText: '평가를 남겨주세요',
+                              hintStyle: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w500), //색상변경 진주
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(
+                                () {
+                                  CommentCompleted = true; // 작성 완료 상태 업데이트
+                                },
+                              );
+                              textFocusNode.unfocus(); // 텍스트 필드에서 포커스 해제
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: Text('작성을 완료하셨습니까?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context)
+                                              .pop(); // 대화 상자 닫기
+                                        },
+                                        child: Text(
+                                          '확인',
+                                          style: TextStyle(color: Colors.blue),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context)
+                                              .pop(); // 대화 상자 닫기
+                                        },
+                                        child: Text(
+                                          '취소',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.amber), //확인버튼 색변경
+                            child: Text(
+                              'Check',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 15),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],
