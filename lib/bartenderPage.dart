@@ -217,7 +217,9 @@ class _bartenderPage extends State<bartenderPage> {
                             itemSize: 30.0, // 아이콘 크기 조절
                             itemBuilder: (context, _) => Icon(
                               Icons.wine_bar,
-                              color: Colors.amber[500],
+                              color: rating == 0
+                                  ? Colors.white
+                                  : Colors.amber[500],
                             ),
                             onRatingUpdate: (newRating) {
                               setState(() {

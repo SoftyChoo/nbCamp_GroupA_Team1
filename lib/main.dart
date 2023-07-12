@@ -86,6 +86,7 @@ class _HomePageState extends State<HomePage> {
     return Consumer<BartenderService>(
         builder: (context, bartenderService, child) {
       List<Bartender> btList = bartenderService.btList;
+
       return Scaffold(
         backgroundColor: Colors.black,
         body: SafeArea(
@@ -243,8 +244,9 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                syPage()), // SecondPage는 이동할 대상 페이지의 클래스명
+                            builder: (context) => syPage(
+                                  index: bartenderService.btList.length - 1,
+                                )), // SecondPage는 이동할 대상 페이지의 클래스명
                       );
                     },
                     icon: Icon(
@@ -265,6 +267,7 @@ class _HomePageState extends State<HomePage> {
                   itemCount: btList.length,
                   itemBuilder: (context, index) {
                     Bartender bartender = btList[index];
+
                     return ListTile(
                       title: Row(
                         children: [

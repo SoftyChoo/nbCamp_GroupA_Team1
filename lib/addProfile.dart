@@ -1,9 +1,21 @@
+import 'package:a_bar/bartender_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class syPage extends StatefulWidget {
-  syPage({super.key});
+  final TextEditingController NameController = TextEditingController();
+  final TextEditingController AgeController = TextEditingController();
+  final TextEditingController MBTIController = TextEditingController();
+  final TextEditingController ADController = TextEditingController();
+  final TextEditingController BlogController = TextEditingController();
+  final TextEditingController Controller = TextEditingController();
+  final TextEditingController StyleController = TextEditingController();
+
+  final int index;
+
+  syPage({super.key, required this.index});
 
   @override
   State<syPage> createState() => _MsPageState();
@@ -12,8 +24,19 @@ class syPage extends StatefulWidget {
 class _MsPageState extends State<syPage> {
   final formKey = GlobalKey<FormState>();
 
+  get index => 1;
+
   @override
   Widget build(BuildContext context) {
+    BartenderService bartenderService = context.read<BartenderService>();
+    Bartender bartenderProfile = bartenderService.btList[index];
+    widget.NameController.text = bartenderProfile.btName;
+    widget.AgeController.text = bartenderProfile.btAge;
+    widget.MBTIController.text = bartenderProfile.btMbti;
+    widget.ADController.text = bartenderProfile.btAdvantage;
+    widget.BlogController.text = bartenderProfile.btBlog;
+    widget.StyleController.text = bartenderProfile.btStyle;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -30,6 +53,7 @@ class _MsPageState extends State<syPage> {
               child: Column(
                 children: [
                   TextFormField(
+                    controller: widget.NameController,
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next, // Keyboard Enter키 속성
                     decoration: InputDecoration(
@@ -43,6 +67,7 @@ class _MsPageState extends State<syPage> {
                     },
                   ),
                   TextFormField(
+                    controller: widget.AgeController,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
@@ -59,6 +84,7 @@ class _MsPageState extends State<syPage> {
                     },
                   ),
                   TextFormField(
+                    controller: widget.MBTIController,
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
@@ -74,6 +100,7 @@ class _MsPageState extends State<syPage> {
                     },
                   ),
                   TextFormField(
+                    controller: widget.ADController,
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
@@ -89,6 +116,7 @@ class _MsPageState extends State<syPage> {
                     },
                   ),
                   TextFormField(
+                    controller: widget.BlogController,
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
@@ -104,6 +132,7 @@ class _MsPageState extends State<syPage> {
                     },
                   ),
                   TextFormField(
+                    controller: widget.StyleController,
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.done,
                     decoration: InputDecoration(
@@ -126,6 +155,37 @@ class _MsPageState extends State<syPage> {
                       final formKeyState = formKey.currentState!;
                       if (formKeyState.validate()) {
                         formKeyState.save();
+                      } else {
+                        AlertDialog(
+                          content: Text('작성을 완료하셨습니까?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                bartenderService.createItem(
+                                    btName: widget.NameController.text,
+                                    btMbti: widget.MBTIController.text,
+                                    btAge: widget.AgeController.text,
+                                    btAdvantage: widget.ADController.text,
+                                    btBlog: widget.BlogController.text,
+                                    btStyle: widget.StyleController.text);
+                                Navigator.of(context).pop(); // 대화 상자 닫기
+                              },
+                              child: Text(
+                                '확인',
+                                style: TextStyle(color: Colors.blue),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(); // 대화 상자 닫기
+                              },
+                              child: Text(
+                                '취소',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ],
+                        );
                       }
                     },
                     child: const Text('Submit'),
