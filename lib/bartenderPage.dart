@@ -292,7 +292,7 @@ class _bartenderPage extends State<bartenderPage> {
               Expanded(
                 flex: 4, //불필요한 stack위젯 삭제
                 child: Container(
-                  color: Colors.black, //진주_별점 배경색변경(검정색으로하고싶음)
+                  color: Colors.black, //별점 배경색변경
                   child: SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -318,7 +318,8 @@ class _bartenderPage extends State<bartenderPage> {
                             },
                           ),
                           TextField(
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                                color: Colors.white), // 텍스트 필드 텍스트 색 변경
                             focusNode: textFocusNode, // FocusNode 할당
                             scrollPhysics:
                                 NeverScrollableScrollPhysics(), //스크롤 불가

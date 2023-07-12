@@ -14,6 +14,8 @@
 .pub-cache/
 .pub/
 build/
+build/4d25a1cda3833f76c80232d3b1a3704b.cache.dill.track.dill
+
 coverage/
 lib/generated_plugin_registrant.dart
 # For library packages, don’t commit the pubspec.lock file.
