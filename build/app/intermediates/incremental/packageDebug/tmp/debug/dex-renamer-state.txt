@@ -1,4 +1,4 @@
-#Wed Jul 12 10:19:54 KST 2023
-base.0=D\:\\flutter\\git\\nbCamp_GroupA_Team1\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Wed Jul 12 15:50:31 KST 2023
+base.0=E\:\\github\\team1\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

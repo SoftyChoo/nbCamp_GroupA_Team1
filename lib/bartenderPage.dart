@@ -199,11 +199,6 @@ class _bartenderPage extends State<bartenderPage> {
                 flex: 3,
                 child: Stack(
                   children: [
-                    Container(
-                      height: 100,
-                      width: double.infinity,
-                      color: Colors.amber,
-                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
