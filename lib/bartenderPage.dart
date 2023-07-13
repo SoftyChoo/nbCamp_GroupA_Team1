@@ -16,8 +16,10 @@ class bartenderPage extends StatefulWidget {
 class _bartenderPage extends State<bartenderPage> {
   TextEditingController contentController = TextEditingController();
   double rating = 0; // 초기 별점 값 설정
-  bool CommentCompleted = false; //작성 완료 상태 여부
+  bool CommentCompleted = false; // 작성 완료 상태 여부
   final FocusNode textFocusNode = FocusNode(); // FocusNode 생성
+  List<Review> reviews = []; // 리뷰 리스트 선언
+
   @override
   void dispose() {
     textFocusNode.dispose(); // 메모리 누수를 방지하기 위해 FocusNode 해제
@@ -290,73 +292,134 @@ class _bartenderPage extends State<bartenderPage> {
                 ),
               ),
               Expanded(
-                flex: 4, //불필요한 stack위젯 삭제
+                flex: 4,
                 child: Container(
-                  color: Colors.black, //별점 배경색변경
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          RatingBar.builder(
-                            initialRating: rating, // rating 변수를 초기 별점 값으로 설정
-                            minRating: 0, //평점 최소 단위. 0점부터 시작
-                            direction: Axis.horizontal,
-                            allowHalfRating: true, //별점 반값 가능 허용여부
-                            itemCount: 5, //평점 갯수 조절
-                            itemSize: 30.0, // 아이콘 크기 조절
-                            itemBuilder: (context, _) => Icon(
-                              Icons.wine_bar,
-                              color: Colors.amber[500], // 선택된 별점 아이콘 색상
-                            ),
-                            unratedColor: Colors.grey, // 선택되지 않은 별점 아이콘 색상
-                            onRatingUpdate: (newRating) {
-                              setState(() {
-                                rating = newRating; // rating 변수 업데이트
-                              });
-                              print(rating); // 업데이트된 별점 출력
-                            },
-                          ),
-                          TextField(
-                            style: TextStyle(
-                                color: Colors.white), // 텍스트 필드 텍스트 색 변경
-                            focusNode: textFocusNode, // FocusNode 할당
-                            scrollPhysics:
-                                NeverScrollableScrollPhysics(), //스크롤 불가
-                            maxLines: 3, //n줄까지 화면에 보임
-                            maxLength: 100, //글자수 제한
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: const Color.fromARGB(255, 46, 45, 45),
-                              hintText: '평가를 남겨주세요',
-                              hintStyle: TextStyle(
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w500), //색상변경 진주
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5),
+                  color: Colors.black,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: reviews.length,
+                          itemBuilder: (context, index) {
+                            final review = reviews[index];
+                            return ListTile(
+                              title: Text(
+                                '별점: ${review.rating}',
+                                style: TextStyle(color: Colors.white),
                               ),
-                            ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              setState(
-                                () {
-                                  CommentCompleted = true; // 작성 완료 상태 업데이트
+                              subtitle: Text(
+                                '댓글: ${review.comment}',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              trailing: IconButton(
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.amber[500],
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    reviews.removeAt(index);
+                                  });
                                 },
-                              );
-                              textFocusNode.unfocus(); // 텍스트 필드에서 포커스 해제
-                            },
-                            style: ElevatedButton.styleFrom(
-                                primary: Colors.amber), //확인버튼 색변경
-                            child: Text(
-                              'Check',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 15),
-                            ),
-                          ),
-                        ],
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ),
+                      RatingBar.builder(
+                        initialRating: rating,
+                        minRating: 0,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        itemSize: 30.0,
+                        itemBuilder: (context, _) => Icon(
+                          Icons.wine_bar,
+                          color: Colors.amber[500],
+                        ),
+                        unratedColor: Colors.grey,
+                        onRatingUpdate: (newRating) {
+                          setState(() {
+                            rating = newRating;
+                          });
+                          print(rating);
+                        },
+                      ),
+                      TextField(
+                        controller: contentController,
+                        style: TextStyle(color: Colors.white),
+                        focusNode: textFocusNode,
+                        scrollPhysics: NeverScrollableScrollPhysics(),
+                        maxLines: 3,
+                        maxLength: 100,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: const Color.fromARGB(255, 46, 45, 45),
+                          hintText: '평가를 남겨주세요',
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(
+                            () {
+                              CommentCompleted = true;
+                              final newReview = Review(
+                                rating: rating,
+                                comment: contentController.text,
+                              );
+                              reviews.add(newReview);
+                              contentController.clear();
+                            },
+                          );
+                          textFocusNode.unfocus();
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                content: Text('작성을 완료하셨습니까?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      '확인',
+                                      style: TextStyle(color: Colors.blue),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      '취소',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.amber,
+                        ),
+                        child: Text(
+                          'Check',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -366,4 +429,14 @@ class _bartenderPage extends State<bartenderPage> {
       ),
     );
   }
+}
+
+class Review {
+  final double rating;
+  final String comment;
+
+  Review({
+    required this.rating,
+    required this.comment,
+  });
 }
