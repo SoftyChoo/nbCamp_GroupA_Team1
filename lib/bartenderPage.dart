@@ -151,10 +151,23 @@ class _bartenderPage extends State<bartenderPage> {
                           margin: EdgeInsets.all(20.0), // 원하는 margin 값을 설정합니다.
                           width: 100,
                           height: 150,
-                          color: Colors.black,
-                          child: Text(
-                            '선택한 칵테일이미지 들어갈곳',
-                            style: TextStyle(color: Colors.white),
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            border: Border.all(
+                              color:
+                                  Colors.white, // Set the desired border color
+                              width: 2.0, // Set the desired border width
+                            ),
+                            borderRadius: BorderRadius.circular(
+                                10.0), // Adjust the border radius as desired
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Image.network(
+                              "https://softychoo.github.io/assets/img/blog/cocktails8.png",
+                              fit: BoxFit.fitHeight,
+                              height: MediaQuery.of(context).size.height * 0.15,
+                            ),
                           ),
                         ),
                       ) //칵테일이미지박스
