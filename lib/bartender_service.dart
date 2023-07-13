@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'main.dart';
@@ -17,9 +19,35 @@ class Bartender {
   String btAdvantage;
   String btBlog;
   String btStyle;
+
+  Map toJoson() {
+    return {
+      'btName': btName,
+      'btMbti': btMbti,
+      'btAge': btAge,
+      'btAdvantage': btAdvantage,
+      'btBlog': btBlog,
+      'btStyle': btStyle,
+    };
+  }
+
+  factory Bartender.fromJson(json) {
+    return Bartender(
+      btName: json['btName'],
+      btMbti: json['btMbti'],
+      btAge: json['btAge'],
+      btAdvantage: json['btAdvantage'],
+      btBlog: json['btBlog'],
+      btStyle: json['btStyle'],
+    );
+  }
 }
 
 class BartenderService extends ChangeNotifier {
+  BartenderService() {
+    loadBartender();
+  }
+
   List<Bartender> btList = [];
 
   createItem(
@@ -63,5 +91,24 @@ class BartenderService extends ChangeNotifier {
   removeItem({required int index}) {
     btList.removeAt(index);
     notifyListeners();
+  }
+
+  saveBartender() {
+    List bartenderJsonList =
+        btList.map((bartender) => bartender.toJoson()).toList();
+
+    String jsonString = jsonEncode(bartenderJsonList);
+
+    prefs.setString('btList', jsonString);
+  }
+
+  loadBartender() {
+    String? jsonString = prefs.getString('btlist');
+
+    if (jsonString == null) return;
+
+    List bartenderJsonList = jsonDecode(jsonString);
+
+    btList = bartenderJsonList.map((json) => Bartender.fromJson(json)).toList();
   }
 }
