@@ -142,88 +142,94 @@ class _HomePageState extends State<HomePage> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.5,
-                child: SingleChildScrollView(
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, //가로로 두 개의 Gridview를 보여줌
-                      childAspectRatio: 7 / 5, //gridView의 높이 조절
-                    ),
-                    itemCount: dataList.length,
-                    itemBuilder: (context, index) {
-                      var blog = dataList[index];
-                      String imgUrl = blog['imgUrl']!; // datalist의 url
-                      String name = blog['name']!; //datalist의 name
-                      String bt = blog['bartender']!;
-                      String price = blog['price']!;
+                child: Expanded(
+                  child: SingleChildScrollView(
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, //가로로 두 개의 Gridview를 보여줌
+                        childAspectRatio: 7 / 5, //gridView의 높이 조절
+                      ),
+                      itemCount: dataList.length,
+                      itemBuilder: (context, index) {
+                        var blog = dataList[index];
+                        String imgUrl = blog['imgUrl']!; // datalist의 url
+                        String name = blog['name']!; //datalist의 name
+                        String bt = blog['bartender']!;
+                        String price = blog['price']!;
 
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Stack(
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.network(
-                                  imgUrl,
-                                  fit: BoxFit.fitHeight,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.15,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                SizedBox(width: 120),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    Text(
-                                      //이름
-                                      name,
-                                      style: TextStyle(
-                                        fontFamily: "name",
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Stack(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Image.network(
+                                    imgUrl,
+                                    fit: BoxFit.fitHeight,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  SizedBox(width: 120),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 30,
                                       ),
-                                    ),
-                                    Text(
-                                      "Bartender \n$bt",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "abar",
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
+                                      Text(
+                                        //이름
+                                        name,
+                                        style: TextStyle(
+                                          fontFamily: "name",
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.0367,
+                                          fontWeight: FontWeight.bold,
                                           color: Colors.white,
-                                          width: 1.0,
                                         ),
                                       ),
-                                      child: Text(
-                                        "$price\$",
-                                        style: TextStyle(color: Colors.white),
+                                      Text(
+                                        "Bartender \n$bt",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "abar",
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(height: 20)
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      );
-                    },
+                                      Spacer(),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: Colors.white,
+                                            width: 1.0,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          "$price\$",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                      SizedBox(height: 20)
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
