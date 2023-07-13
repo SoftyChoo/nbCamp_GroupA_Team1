@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
+import 'Utill/colorList.dart';
 import 'bartender_service.dart';
 
 void main() {
@@ -205,7 +206,7 @@ class _bartenderPage extends State<bartenderPage> {
                                 Name,
                                 style: TextStyle(
                                     fontFamily: "abar",
-                                    color: Colors.white,
+                                    color: ColorList().gold,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -237,7 +238,7 @@ class _bartenderPage extends State<bartenderPage> {
                                 Mbti,
                                 style: TextStyle(
                                     fontFamily: "abar",
-                                    color: Colors.white,
+                                    color: ColorList().gold,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -269,7 +270,7 @@ class _bartenderPage extends State<bartenderPage> {
                                 Age,
                                 style: TextStyle(
                                     fontFamily: "abar",
-                                    color: Colors.white,
+                                    color: ColorList().gold,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -301,7 +302,7 @@ class _bartenderPage extends State<bartenderPage> {
                                 Blog,
                                 style: TextStyle(
                                     fontFamily: "abar",
-                                    color: Colors.white,
+                                    color: ColorList().gold,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -333,7 +334,7 @@ class _bartenderPage extends State<bartenderPage> {
                                 Advantage,
                                 style: TextStyle(
                                     fontFamily: "abar",
-                                    color: Colors.white,
+                                    color: ColorList().gold,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -361,11 +362,11 @@ class _bartenderPage extends State<bartenderPage> {
                           Expanded(
                             child: Container(
                               // blog 올라올 부분
-                              color: Colors.white,
                               child: Text(
                                 Colstyle,
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    fontFamily: "abar",
+                                    color: ColorList().gold,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
