@@ -1,3 +1,4 @@
+import 'package:a_bar/Utill/colorList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -163,8 +164,8 @@ class _bartenderPage extends State<bartenderPage> {
               Expanded(
                 flex: 2,
                 child: Container(
-                  height: 200,
                   color: Colors.black,
+                  height: 200,
                   child: ListView(
                     children: [
                       Padding(
@@ -190,20 +191,21 @@ class _bartenderPage extends State<bartenderPage> {
                               child: Text(
                                 'NAME : ',
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                                  fontFamily: "name",
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
                               ),
                             ),
                           ),
                           Expanded(
                             child: Container(
                               // 이름 올라올 부분
-                              color: Colors.white,
                               child: Text(
                                 Name,
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    fontFamily: "abar",
+                                    color: ColorList().gold,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -221,20 +223,21 @@ class _bartenderPage extends State<bartenderPage> {
                               child: Text(
                                 'MBTI : ',
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                                  fontFamily: "name",
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
                               ),
                             ),
                           ),
                           Expanded(
                             child: Container(
                               // mbti 올라올 부분
-                              color: Colors.white,
                               child: Text(
                                 Mbti,
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    fontFamily: "abar",
+                                    color: ColorList().gold,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -252,20 +255,21 @@ class _bartenderPage extends State<bartenderPage> {
                               child: Text(
                                 'AGE : ',
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                                  fontFamily: "name",
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
                               ),
                             ),
                           ),
                           Expanded(
                             child: Container(
                               // age 올라올 부분
-                              color: Colors.white,
                               child: Text(
                                 Age,
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    fontFamily: "abar",
+                                    color: ColorList().gold,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -283,20 +287,21 @@ class _bartenderPage extends State<bartenderPage> {
                               child: Text(
                                 'GITHUB/BLOG : ',
                                 style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w700),
+                                  fontFamily: "name",
+                                  color: Colors.grey,
+                                  fontSize: 15,
+                                ),
                               ),
                             ),
                           ),
                           Expanded(
                             child: Container(
                               // github 올라올 부분
-                              color: Colors.white,
                               child: Text(
                                 Blog,
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    fontFamily: "abar",
+                                    color: ColorList().gold,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -314,20 +319,21 @@ class _bartenderPage extends State<bartenderPage> {
                               child: Text(
                                 'Advantage : ',
                                 style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w700),
+                                  fontFamily: "name",
+                                  color: Colors.grey,
+                                  fontSize: 15,
+                                ),
                               ),
                             ),
                           ),
                           Expanded(
                             child: Container(
                               // blog 올라올 부분
-                              color: Colors.white,
                               child: Text(
                                 Advantage,
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    fontFamily: "abar",
+                                    color: ColorList().gold,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -345,20 +351,21 @@ class _bartenderPage extends State<bartenderPage> {
                               child: Text(
                                 'Collaboration Style : ',
                                 style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w700),
+                                  fontFamily: "name",
+                                  color: Colors.grey,
+                                  fontSize: 14,
+                                ),
                               ),
                             ),
                           ),
                           Expanded(
                             child: Container(
                               // blog 올라올 부분
-                              color: Colors.white,
                               child: Text(
                                 Colstyle,
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    fontFamily: "abar",
+                                    color: ColorList().gold,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
