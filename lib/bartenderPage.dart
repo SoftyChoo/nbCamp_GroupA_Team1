@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -475,9 +476,8 @@ class _bartenderPage extends State<bartenderPage> {
                         controller: contentController,
                         style: TextStyle(color: Colors.white),
                         focusNode: textFocusNode,
-                        scrollPhysics: NeverScrollableScrollPhysics(),
                         maxLines: 3,
-                        maxLength: 100,
+                        maxLength: 100, //글자 수 제한
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: const Color.fromARGB(255, 46, 45, 45),
@@ -489,6 +489,8 @@ class _bartenderPage extends State<bartenderPage> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),
+                          counterStyle:
+                              TextStyle(color: Colors.grey), // 글자 수 색상을 변경합니다.
                         ),
                       ),
                       ElevatedButton(
