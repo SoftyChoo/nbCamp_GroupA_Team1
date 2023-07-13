@@ -12,10 +12,11 @@ void main() {
 }
 
 class bartenderPage extends StatefulWidget {
-  const bartenderPage({Key? key}) : super(key: key);
+  const bartenderPage({Key? key, this.index}) : super(key: key);
 
   @override
   State<bartenderPage> createState() => _bartenderPage();
+  final index;
 }
 
 class _bartenderPage extends State<bartenderPage> {
@@ -34,8 +35,7 @@ class _bartenderPage extends State<bartenderPage> {
   @override
   Widget build(BuildContext context) {
     BartenderService bartenderService = context.read<BartenderService>();
-    Bartender bartenderPage =
-        bartenderService.btList[bartenderService.btList.length - 1];
+    Bartender bartenderPage = bartenderService.btList[widget.index];
     String Name = bartenderPage.btName;
     String Age = bartenderPage.btAge;
     String Mbti = bartenderPage.btMbti;
@@ -395,174 +395,182 @@ class _bartenderPage extends State<bartenderPage> {
                 flex: 4,
                 child: Container(
                   color: Colors.black,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: reviews.length,
-                          itemBuilder: (context, index) {
-                            final review = reviews[index];
-                            return Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  border: Border.all(
-                                    color: Colors
-                                        .white, // Set the desired border color
-                                    width: 2.0, // Set the desired border width
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                      10.0), // Adjust the border radius as desired
-                                ),
-                                child: ListTile(
-                                  title: Row(
-                                    children: [
-                                      Text(
-                                        '별점: ${review.rating}',
+                  child: SingleChildScrollView(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height *
+                          0.4, //comment의 위치
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: reviews.length,
+                              itemBuilder: (context, index) {
+                                final review = reviews[index];
+                                return Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      border: Border.all(
+                                        color: Colors
+                                            .white, // Set the desired border color
+                                        width:
+                                            2.0, // Set the desired border width
+                                      ),
+                                      borderRadius: BorderRadius.circular(
+                                          10.0), // Adjust the border radius as desired
+                                    ),
+                                    child: ListTile(
+                                      title: Row(
+                                        children: [
+                                          Text(
+                                            '별점: ${review.rating}',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                      subtitle: Text(
+                                        '댓글: ${review.comment}',
                                         style: TextStyle(color: Colors.white),
                                       ),
-                                    ],
-                                  ),
-                                  subtitle: Text(
-                                    '댓글: ${review.comment}',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  trailing: IconButton(
-                                    icon: Icon(
-                                      Icons.delete,
-                                      color: Colors.amber[500],
-                                    ),
-                                    onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: Text('삭제하시겠습니까?'),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    reviews.removeAt(index);
-                                                  });
-                                                  Navigator.of(context)
-                                                      .pop(); // Close the dialog
-                                                },
-                                                child: Text(
-                                                  '삭제',
-                                                  style: TextStyle(
-                                                      color: Colors.red),
-                                                ),
-                                              ),
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context)
-                                                      .pop(); // Close the dialog
-                                                },
-                                                child: Text('취소'),
-                                              ),
-                                            ],
+                                      trailing: IconButton(
+                                        icon: Icon(
+                                          Icons.delete,
+                                          color: Colors.amber[500],
+                                        ),
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text('삭제하시겠습니까?'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        reviews.removeAt(index);
+                                                      });
+                                                      Navigator.of(context)
+                                                          .pop(); // Close the dialog
+                                                    },
+                                                    child: Text(
+                                                      '삭제',
+                                                      style: TextStyle(
+                                                          color: Colors.red),
+                                                    ),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop(); // Close the dialog
+                                                    },
+                                                    child: Text('취소'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
                                           );
                                         },
-                                      );
-                                    },
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                      RatingBar.builder(
-                        initialRating: rating,
-                        minRating: 0,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemCount: 5,
-                        itemSize: 30.0,
-                        itemBuilder: (context, _) => Icon(
-                          Icons.wine_bar,
-                          color: Colors.amber[500],
-                        ),
-                        unratedColor: Colors.grey,
-                        onRatingUpdate: (newRating) {
-                          setState(() {
-                            rating = newRating;
-                          });
-                          print(rating);
-                        },
-                      ),
-                      TextField(
-                        controller: contentController,
-                        style: TextStyle(color: Colors.white),
-                        focusNode: textFocusNode,
-                        scrollPhysics: NeverScrollableScrollPhysics(),
-                        maxLines: 3,
-                        maxLength: 100, //글자 수 제한
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color.fromARGB(255, 46, 45, 45),
-                          hintText: '평가를 남겨주세요',
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          counterStyle:
-                              TextStyle(color: Colors.grey), // 글자 수 색상을 변경합니다.
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          setState(
-                            () {
-                              if (contentController.text.isEmpty) {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text('빈칸이 존재합니다!'),
-                                      content: Text('평가를 남겨주세요!'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context)
-                                                .pop(); // Close the dialog
-                                          },
-                                          child: Text('OK'),
-                                        ),
-                                      ],
-                                    );
-                                  },
                                 );
-                              } else {
-                                CommentCompleted = true;
-                                final newReview = Review(
-                                  rating: rating,
-                                  comment: contentController.text,
-                                );
-                                reviews.add(newReview);
-                                contentController.clear();
-                              }
+                              },
+                            ),
+                          ),
+                          RatingBar.builder(
+                            initialRating: rating,
+                            minRating: 0,
+                            direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            itemCount: 5,
+                            itemSize: 30.0,
+                            itemBuilder: (context, _) => Icon(
+                              Icons.wine_bar,
+                              color: Colors.amber[500],
+                            ),
+                            unratedColor: Colors.grey,
+                            onRatingUpdate: (newRating) {
+                              setState(() {
+                                rating = newRating;
+                              });
+                              print(rating);
                             },
-                          );
-                          textFocusNode.unfocus();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.amber,
-                        ),
-                        child: Text(
-                          'Check',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 15,
                           ),
-                        ),
+                          TextField(
+                            controller: contentController,
+                            style: TextStyle(color: Colors.white),
+                            focusNode: textFocusNode,
+                            scrollPhysics: NeverScrollableScrollPhysics(),
+                            maxLines: 3,
+                            maxLength: 100, //글자 수 제한
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: const Color.fromARGB(255, 46, 45, 45),
+                              hintText: '평가를 남겨주세요',
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              counterStyle: TextStyle(
+                                  color: Colors.grey), // 글자 수 색상을 변경합니다.
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(
+                                () {
+                                  if (contentController.text.isEmpty) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('빈칸이 존재합니다!'),
+                                          content: Text('평가를 남겨주세요!'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context)
+                                                    .pop(); // Close the dialog
+                                              },
+                                              child: Text('OK'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  } else {
+                                    CommentCompleted = true;
+                                    final newReview = Review(
+                                      rating: rating,
+                                      comment: contentController.text,
+                                    );
+                                    reviews.add(newReview);
+                                    contentController.clear();
+                                  }
+                                },
+                              );
+                              textFocusNode.unfocus();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.amber,
+                            ),
+                            child: Text(
+                              'Check',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                        ],
                       ),
-                      SizedBox(height: 10),
-                    ],
+                    ),
                   ),
                 ),
               ),

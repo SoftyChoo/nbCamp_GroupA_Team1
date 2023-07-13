@@ -326,7 +326,9 @@ class _HomePageState extends State<HomePage> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      bartenderPage()), // SecondPage는 이동할 대상 페이지의 클래스명
+                                                      bartenderPage(
+                                                        index: index,
+                                                      )), // SecondPage는 이동할 대상 페이지의 클래스명
                                             ).then(
                                               (value) {
                                                 Navigator.pop(
