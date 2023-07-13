@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'main.dart';
@@ -17,9 +19,35 @@ class Bartender {
   String btAdvantage;
   String btBlog;
   String btStyle;
+
+  Map toJson() {
+    return {
+      'btName': btName,
+      'btMbti': btMbti,
+      'btAge': btAge,
+      'btAdvantage': btAdvantage,
+      'btBlog': btBlog,
+      'btStyle': btStyle,
+    };
+  }
+
+  factory Bartender.fromJson(json) {
+    return Bartender(
+      btName: json['btName'],
+      btMbti: json['btMbti'],
+      btAge: json['btAge'],
+      btAdvantage: json['btAdvantage'],
+      btBlog: json['btBlog'],
+      btStyle: json['btStyle'],
+    );
+  }
 }
 
 class BartenderService extends ChangeNotifier {
+  BartenderService() {
+    loadBartender();
+  }
+
   List<Bartender> btList = [];
 
   createItem(
@@ -40,6 +68,7 @@ class BartenderService extends ChangeNotifier {
       ),
     );
     notifyListeners(); //Consumer<BartenderService>의 builder 부분을 호출해서 화면 새로고침
+    saveBartender();
   }
 
   updateItem({
@@ -58,10 +87,31 @@ class BartenderService extends ChangeNotifier {
     btList[index].btStyle = btStyle;
     btList[index].btAdvantage = btAdvantage;
     notifyListeners();
+    saveBartender();
   }
 
   removeItem({required int index}) {
     btList.removeAt(index);
     notifyListeners();
+    saveBartender();
+  }
+
+  saveBartender() {
+    List bartenderJsonList =
+        btList.map((bartender) => bartender.toJson()).toList();
+
+    String jsonString = jsonEncode(bartenderJsonList);
+
+    prefs.setString('btList', jsonString);
+  }
+
+  loadBartender() {
+    String? jsonString = prefs.getString('btList');
+
+    if (jsonString == null) return;
+
+    List bartenderJsonList = jsonDecode(jsonString);
+
+    btList = bartenderJsonList.map((json) => Bartender.fromJson(json)).toList();
   }
 }
