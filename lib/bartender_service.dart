@@ -20,7 +20,7 @@ class Bartender {
   String btBlog;
   String btStyle;
 
-  Map toJoson() {
+  Map toJson() {
     return {
       'btName': btName,
       'btMbti': btMbti,
@@ -68,6 +68,7 @@ class BartenderService extends ChangeNotifier {
       ),
     );
     notifyListeners(); //Consumer<BartenderService>의 builder 부분을 호출해서 화면 새로고침
+    saveBartender();
   }
 
   updateItem({
@@ -86,16 +87,18 @@ class BartenderService extends ChangeNotifier {
     btList[index].btStyle = btStyle;
     btList[index].btAdvantage = btAdvantage;
     notifyListeners();
+    saveBartender();
   }
 
   removeItem({required int index}) {
     btList.removeAt(index);
     notifyListeners();
+    saveBartender();
   }
 
   saveBartender() {
     List bartenderJsonList =
-        btList.map((bartender) => bartender.toJoson()).toList();
+        btList.map((bartender) => bartender.toJson()).toList();
 
     String jsonString = jsonEncode(bartenderJsonList);
 
@@ -103,7 +106,7 @@ class BartenderService extends ChangeNotifier {
   }
 
   loadBartender() {
-    String? jsonString = prefs.getString('btlist');
+    String? jsonString = prefs.getString('btList');
 
     if (jsonString == null) return;
 
