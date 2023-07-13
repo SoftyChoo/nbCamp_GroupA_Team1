@@ -302,25 +302,72 @@ class _bartenderPage extends State<bartenderPage> {
                           itemCount: reviews.length,
                           itemBuilder: (context, index) {
                             final review = reviews[index];
-                            return ListTile(
-                              title: Text(
-                                '별점: ${review.rating}',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              subtitle: Text(
-                                '댓글: ${review.comment}',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              trailing: IconButton(
-                                icon: Icon(
-                                  Icons.delete,
-                                  color: Colors.amber[500],
+                            return Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  border: Border.all(
+                                    color: Colors
+                                        .white, // Set the desired border color
+                                    width: 2.0, // Set the desired border width
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                      10.0), // Adjust the border radius as desired
                                 ),
-                                onPressed: () {
-                                  setState(() {
-                                    reviews.removeAt(index);
-                                  });
-                                },
+                                child: ListTile(
+                                  title: Row(
+                                    children: [
+                                      Text(
+                                        '별점: ${review.rating}',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  subtitle: Text(
+                                    '댓글: ${review.comment}',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  trailing: IconButton(
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: Colors.amber[500],
+                                    ),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text('삭제하시겠습니까?'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    reviews.removeAt(index);
+                                                  });
+                                                  Navigator.of(context)
+                                                      .pop(); // Close the dialog
+                                                },
+                                                child: Text(
+                                                  '삭제',
+                                                  style: TextStyle(
+                                                      color: Colors.red),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pop(); // Close the dialog
+                                                },
+                                                child: Text('취소'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
                               ),
                             );
                           },
@@ -369,44 +416,37 @@ class _bartenderPage extends State<bartenderPage> {
                         onPressed: () {
                           setState(
                             () {
-                              CommentCompleted = true;
-                              final newReview = Review(
-                                rating: rating,
-                                comment: contentController.text,
-                              );
-                              reviews.add(newReview);
-                              contentController.clear();
+                              if (contentController.text.isEmpty) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text('빈칸이 존재합니다!'),
+                                      content: Text('평가를 남겨주세요!'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop(); // Close the dialog
+                                          },
+                                          child: Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else {
+                                CommentCompleted = true;
+                                final newReview = Review(
+                                  rating: rating,
+                                  comment: contentController.text,
+                                );
+                                reviews.add(newReview);
+                                contentController.clear();
+                              }
                             },
                           );
                           textFocusNode.unfocus();
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                content: Text('작성을 완료하셨습니까?'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text(
-                                      '확인',
-                                      style: TextStyle(color: Colors.blue),
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text(
-                                      '취소',
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
                         },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.amber,
@@ -419,6 +459,7 @@ class _bartenderPage extends State<bartenderPage> {
                           ),
                         ),
                       ),
+                      SizedBox(height: 10),
                     ],
                   ),
                 ),
