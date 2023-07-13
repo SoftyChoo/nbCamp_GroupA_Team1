@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
+
+import 'bartender_service.dart';
 
 void main() {
   runApp(bartenderPage());
@@ -28,6 +31,16 @@ class _bartenderPage extends State<bartenderPage> {
 
   @override
   Widget build(BuildContext context) {
+    BartenderService bartenderService = context.read<BartenderService>();
+    Bartender bartenderPage =
+        bartenderService.btList[bartenderService.btList.length - 1];
+    String Name = bartenderPage.btName;
+    String Age = bartenderPage.btAge;
+    String Mbti = bartenderPage.btMbti;
+    String Advantage = bartenderPage.btAdvantage;
+    String Blog = bartenderPage.btBlog;
+    String Colstyle = bartenderPage.btStyle;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: GestureDetector(
@@ -187,6 +200,13 @@ class _bartenderPage extends State<bartenderPage> {
                             child: Container(
                               // 이름 올라올 부분
                               color: Colors.white,
+                              child: Text(
+                                Name,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ],
@@ -211,6 +231,13 @@ class _bartenderPage extends State<bartenderPage> {
                             child: Container(
                               // mbti 올라올 부분
                               color: Colors.white,
+                              child: Text(
+                                Mbti,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ],
@@ -235,6 +262,13 @@ class _bartenderPage extends State<bartenderPage> {
                             child: Container(
                               // age 올라올 부분
                               color: Colors.white,
+                              child: Text(
+                                Age,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ],
@@ -247,7 +281,7 @@ class _bartenderPage extends State<bartenderPage> {
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text(
-                                'GITHUB : ',
+                                'GITHUB/BLOG : ',
                                 style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 12,
@@ -259,6 +293,13 @@ class _bartenderPage extends State<bartenderPage> {
                             child: Container(
                               // github 올라올 부분
                               color: Colors.white,
+                              child: Text(
+                                Blog,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ],
@@ -271,7 +312,7 @@ class _bartenderPage extends State<bartenderPage> {
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text(
-                                'BLOG : ',
+                                'Advantage : ',
                                 style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 12,
@@ -283,6 +324,44 @@ class _bartenderPage extends State<bartenderPage> {
                             child: Container(
                               // blog 올라올 부분
                               color: Colors.white,
+                              child: Text(
+                                Advantage,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 150,
+                            height: 30,
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                'Collaboration Style : ',
+                                style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              // blog 올라올 부분
+                              color: Colors.white,
+                              child: Text(
+                                Colstyle,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ],
